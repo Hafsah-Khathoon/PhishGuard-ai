@@ -4,15 +4,22 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
-    // For GitHub Pages: use '/repository-name/' as base
-    // For local dev: use '/'
-    // Note: Repository name is "PhishGuard-ai" (case-sensitive)
-    const base = process.env.GITHUB_PAGES === 'true' ? '/PhishGuard-ai/' : '/';
+    
     return {
-      base: base,
+      base: '/PhishGuard-ai/',
       server: {
         port: 3000,
         host: '0.0.0.0',
+      },
+      build: {
+        outDir: 'dist',
+        assetsDir: 'assets',
+        sourcemap: false,
+        rollupOptions: {
+          output: {
+            manualChunks: undefined,
+          }
+        }
       },
       plugins: [react()],
       define: {
